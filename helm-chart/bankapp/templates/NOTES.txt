@@ -1,0 +1,18 @@
+AI-BankApp has been deployed!
+
+Release: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+
+Components:
+  - BankApp (Spring Boot):  {{ include "bankapp.fullname" . }}-service:{{ .Values.bankapp.service.port }}
+  {{- if .Values.mysql.enabled }}
+  - MySQL:                  {{ include "bankapp.fullname" . }}-mysql:3306
+  {{- end }}
+  {{- if .Values.ollama.enabled }}
+  - Ollama AI:              {{ include "bankapp.fullname" . }}-ollama:11434
+  {{- end }}
+
+To access the app:
+  kubectl port-forward svc/{{ include "bankapp.fullname" . }}-service -n {{ .Release.Namespace }} 8080:8080
+
+Then open: http://localhost:8080

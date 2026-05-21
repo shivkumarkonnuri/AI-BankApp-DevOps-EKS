@@ -1,0 +1,23 @@
+image:
+  repository: mysql
+  tag: "8.0"
+  pullPolicy: IfNotPresent
+
+auth:
+  rootPassword: Test@123
+  database: bankappdb
+
+service:
+  type: ClusterIP
+  port: 3306
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+storage:
+  size: 5Gi
